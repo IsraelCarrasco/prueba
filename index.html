@@ -1,0 +1,211 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Rosalinda</title>
+
+  <!-- Fuente cursiva elegante -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ff9eb8, #ffd4e0, #ffb3c6);
+      background-size: 300% 300%;
+      animation: gradientFlow 10s ease infinite;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      color: white;
+    }
+
+    .floating-hearts {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .floating-hearts span {
+      position: absolute;
+      display: block;
+      color: rgba(255,255,255,0.6);
+      animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.6); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(-10vh) scale(1.3); opacity: 0; }
+    }
+
+    .content {
+      position: relative;
+      text-align: center;
+      z-index: 1;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(15px);
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      animation: fadeIn 2s ease;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    /* Imagen principal circular */
+    .top-image {
+      width: 130px;
+      height: 130px;
+      margin-bottom: 20px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid rgba(255,255,255,0.9);
+      box-shadow: 0 0 20px rgba(255,105,180,0.6);
+      animation: float 3s ease-in-out infinite;
+      transition: transform 0.3s ease;
+    }
+
+    .top-image:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(255,255,255,0.8);
+    }
+
+    /* Texto de "Para Rosalinda" con fuente cursiva */
+    h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.8rem;
+      color: white;
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    /* Texto centrado */
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1.3;
+      text-shadow: 0 0 10px rgba(255,255,255,0.5);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    h1 span {
+      font-size: 1.5rem;
+    }
+
+    /* Botón */
+    button {
+      background: linear-gradient(45deg, #ff6fa3, #ff4081);
+      border: none;
+      padding: 14px 40px;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(255,105,180,0.6);
+      animation: heartbeat 1.5s infinite;
+    }
+
+    button:hover {
+      background: linear-gradient(45deg, #ff80b5, #ff4fa8);
+      transform: scale(1.08);
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(0.95); }
+      75% { transform: scale(1.05); }
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.4rem; }
+      h2 { font-size: 2.2rem; }
+      button { font-size: 1rem; padding: 12px 30px; }
+      .content { padding: 30px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="floating-hearts" id="hearts-container"></div>
+
+  <div class="content">
+    <h2>Para Rosalinda</h2>
+    <h1><span>🎉</span> ¡Feliz Cumpleaños! <span>🎂</span></h1>
+    <button id="btn-corazones">Hazme click 💕</button>
+  </div>
+
+  <script>
+    const btn = document.getElementById('btn-corazones');
+    const container = document.getElementById('hearts-container');
+
+    setInterval(() => {
+      const heart = document.createElement('span');
+      heart.innerHTML = '💖';
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+      heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+      container.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 300);
+
+    btn.addEventListener('click', () => {
+      for (let i = 0; i < 20; i++) {
+        crearCorazon();
+      }
+      btn.innerText = "Cargando sorpresa... 💌";
+      setTimeout(() => {
+        window.location.href = "rosy.html";
+      }, 5000);
+    });
+
+    function crearCorazon() {
+      const heart = document.createElement('div');
+      heart.innerHTML = '💖';
+      heart.style.position = 'absolute';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = window.innerHeight + 'px';
+      heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+      heart.style.animation = `floatUp ${Math.random() * 2 + 3}s ease-in forwards`;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }
+  </script>
+</body>
+</html>
